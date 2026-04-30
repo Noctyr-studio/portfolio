@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmjpwpkbbf20o"]
+[gd_scene format=3 uid="uid://cmjpwpkbbf20o"]
 
 [ext_resource type="Script" uid="uid://b8r8ryfxlorh1" path="res://UI/startMenu.gd" id="1_bo5hi"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_8gori"]
@@ -7,14 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="5_cyaua"]
 [ext_resource type="Texture2D" uid="uid://bju43nffmex5" path="res://art/UI/Pointers/01.png" id="6_34yav"]
 
-[node name="StartMenu" type="CanvasLayer"]
+[node name="LevelUpMenu" type="CanvasLayer" unique_id=1468719218]
 script = ExtResource("1_bo5hi")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=764685290]
 stream = ExtResource("3_8gori")
 volume_db = 3.333
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1465160395]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +26,7 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Control"]
+[node name="TextureRect2" type="TextureRect" parent="Control" unique_id=294263783]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,13 +42,13 @@ grow_vertical = 2
 scale = Vector2(2.4499986, 0.85)
 texture = ExtResource("2_8gori")
 
-[node name="GoldButton" type="Button" parent="."]
+[node name="GoldButton" type="Button" parent="." unique_id=1992199989]
 offset_left = 460.0
 offset_top = 286.0
 offset_right = 592.0
 offset_bottom = 384.0
 
-[node name="Label" type="Label" parent="GoldButton"]
+[node name="Label" type="Label" parent="GoldButton" unique_id=959934247]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 51.0
@@ -56,7 +56,7 @@ offset_right = 108.0
 offset_bottom = 83.0
 text = "200 Gold"
 
-[node name="TextureRect" type="TextureRect" parent="GoldButton"]
+[node name="TextureRect" type="TextureRect" parent="GoldButton" unique_id=822164969]
 layout_mode = 0
 offset_left = 41.0
 offset_top = 6.0
@@ -65,13 +65,13 @@ offset_bottom = 70.0
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_mgr47")
 
-[node name="HPButton" type="Button" parent="."]
+[node name="HPButton" type="Button" parent="." unique_id=65564789]
 offset_left = 600.0
 offset_top = 286.0
 offset_right = 731.0
 offset_bottom = 385.0
 
-[node name="Label" type="Label" parent="HPButton"]
+[node name="Label" type="Label" parent="HPButton" unique_id=377998051]
 layout_mode = 0
 offset_left = 41.0
 offset_top = 53.0
@@ -79,7 +79,7 @@ offset_right = 86.0
 offset_bottom = 85.0
 text = "50 HP"
 
-[node name="TextureRect" type="TextureRect" parent="HPButton"]
+[node name="TextureRect" type="TextureRect" parent="HPButton" unique_id=945249854]
 layout_mode = 0
 offset_left = 38.0
 offset_top = 16.0
@@ -88,13 +88,13 @@ offset_bottom = 80.0
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_cyaua")
 
-[node name="ATKButton" type="Button" parent="."]
+[node name="ATKButton" type="Button" parent="." unique_id=175081134]
 offset_left = 739.0
 offset_top = 286.0
 offset_right = 870.0
 offset_bottom = 385.0
 
-[node name="Label" type="Label" parent="ATKButton"]
+[node name="Label" type="Label" parent="ATKButton" unique_id=1360094404]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 55.0
@@ -102,7 +102,7 @@ offset_right = 119.0
 offset_bottom = 87.0
 text = "25 ATK"
 
-[node name="TextureRect" type="TextureRect" parent="ATKButton"]
+[node name="TextureRect" type="TextureRect" parent="ATKButton" unique_id=2068705648]
 layout_mode = 0
 offset_left = 38.0
 offset_top = 7.0

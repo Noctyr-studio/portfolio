@@ -13,7 +13,8 @@ const ARCHER = preload("uid://0g50ua6nypjf")
 var hp : int
 var hpMax : int
 var hpDmg : int
-var score : int
+var exp : int
+var lvl : int
 
 var gold : int
 
@@ -27,11 +28,16 @@ var difficulty : float
 const DIFF_MULTIPLIER: float = 1.15
 var shop: bool = false
 
+var health_multiplier: float = pow(1.1, wave - 1)
+var damage_multiplier: float = pow(1.0, wave - 1)
+
+var hp_enemy_display = round(health_multiplier * 100)
+
+@onready var level_up_menu: CanvasLayer = $LevelUpMenu
 @onready var castle: CharacterBody2D = $Castle
 @onready var Seconds: Timer = $Seconds
 @onready var EnemySpawner: Timer = $EnemySpawnerTimer
 @onready var player = get_node("/root/World/Player")
-@onready var fortress = get_node("/root/World/Fortress")
 @onready var wave_cooldown: Timer = $Wave_Cooldown
 
 
@@ -46,14 +52,17 @@ func new_game():
 	get_tree().call_group("items", "queue_free") 
 	hpMax = 100
 	hp = 100
-	score = 0
+	exp = 0
+	lvl = 1
+	health_multiplier = 1.0
+	damage_multiplier = 1.0
 	gold = 0
 	wave = 1
 	player.attack_damage = 100
 	difficulty = 6.0
-	min = 10
+	min = 8
 	sec = 0
-	wave_cc = 20
+	wave_cc = 10
 	player.reset()
 	reset()
 	# 🔥 activar cooldown para la PRIMERA oleada
@@ -95,9 +104,12 @@ func is_wave_completed():
 func _physics_process(_delta: float) -> void:
 	hpDmg = (hpMax - hp) 
 	$HUD/HP_Label.text = "HP: " + str(hp) + "/" + str(hpMax)
-	$HUD/Score_Label.text = "SCORE: " + str(score)
+	$HUD/Exp_Label.text = "EXP : " + str(exp)
+	$HUD/Lvl_Label.text = "Level : " + str(lvl)
 	$HUD/ATK_Label.text = "ATK: " + str(player.attack_damage)
-		
+	#$HUD/enemy_HP.text = "Enemy HP: " + str(hp_enemy_display)
+	$HUD/enemy_HP.text = "Enemy HP: x%.2f" % health_multiplier
+	
 	if is_wave_completed():
 		get_node("Wave_Cooldown").process_mode = Node.PROCESS_MODE_INHERIT
 		
@@ -111,7 +123,7 @@ func _on_wave_cooldown_timeout() -> void:
 		reset()
 		spawn_wave_enemies()
 		wave += 1
-		wave_cc = 20
+		wave_cc = 10
 		$HUD/Wave_Cooldown.text = ""
 		wave_cooldown.process_mode = Node.PROCESS_MODE_DISABLED
 
@@ -120,16 +132,24 @@ func reset():
 	max_enemies = int(difficulty)
 	get_tree().call_group("enemies", "queue_free")
 	$HUD/HP_Label.text = "HP: " + str(hp)
-	$HUD/Score_Label.text = "SCORE: " + str(score	)
+
+	$HUD/Exp_Label.text = "EXP : " + str(exp)
+	$HUD/Lvl_Label.text = "Level : " + str(lvl)
+	
 	$HUD/wave_Label.text = "Wave: " + str(wave)
 	$HUD/enemies_Label.text = "Enemies: " + str(max_enemies)
+	$HUD/enemy_HP.text = "Enemy HP: x%.2f" % health_multiplier
 	$HUD/Minutes.text = str(min) + " :"
 	$HUD/Seconds.text = str(sec)
 	$GameScore.hide()	
 	get_tree().paused = false
 
 
-
+# func show_next_wave_info():
+# 	var text = "Oleada %d -> Enemigos: %d | Vida x%.2f | Daño x%.2f" % [
+# 	wave, max_enemies, health_multiplier, damage_multiplier
+# 	]
+# 	wave_label.text = text
 
 ### 🔥 Generador de enemigos con spawn seguro ###
 func spawn_wave_enemies() -> void:
@@ -144,8 +164,9 @@ func spawn_wave_enemies() -> void:
 	# punto central de fallback (en caso de no poder spawnear alrededor del player)
 	var center_fallback: Vector2 = (map_min + map_max) * 0.5
 
-	var health_multiplier: float = pow(1.1, wave - 1)
-	var damage_multiplier: float = pow(1.0, wave - 1)
+	health_multiplier = pow(1.1, wave - 1) 
+	damage_multiplier = pow(1.0, wave - 1)
+	
 
 	# chequeo básico: que el player exista y tenga posición
 	if not player:
@@ -187,11 +208,8 @@ func spawn_wave_enemies() -> void:
 		# Escalar vida y daño del enemigo si tiene el método
 		if enemy.has_method("scale_stats"):
 			enemy.scale_stats(health_multiplier, damage_multiplier)
-
-		var text = "Oleada %d -> Enemigos: %d | Vida x%.2f | Daño x%.2f" % [
-		wave, max_enemies, health_multiplier, damage_multiplier
-		]
-		wave_label.text = text
+		#show_next_wave_info()
+		
 
 
 func on_death():	

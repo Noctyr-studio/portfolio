@@ -10,14 +10,14 @@ class_name Player extends Info
 @export var projectile_scene: PackedScene
 @export var projectile_speed: float = 400.0
 
+@onready var level_up_menu: CanvasLayer = $"../LevelUpMenu"
 
 @onready var trader_menu: CanvasLayer = $"../TraderMenu"
 @onready var shaman_menu: CanvasLayer = $"../ShamanMenu"
 @onready var captain_menu: CanvasLayer = $"../CaptainMenu"
 
-
-@onready var worker = get_node("/root/World/Worker")
-
+@onready var exp_label = get_node("/root/World/HUD/Exp_Label")
+@onready var lvl_label = get_node("/root/World/HUD/Lvl_Label")
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
@@ -56,7 +56,15 @@ func _ready() -> void:
 	#get_global_mouse_position()
 	
 	#canvas_layer.hide()
-	
+
+func level_up():
+	get_tree().paused = true
+	world.exp = 0 
+	exp_label.text = "EXP : " +str(world.exp) 
+	world.lvl += 1 
+	lvl_label.text = "Level : " +str(world.lvl) 
+	level_up_menu.show()
+		
 func reset():
 
 	#position = screen_size * 2.5
@@ -109,8 +117,8 @@ func _input(event: InputEvent) -> void:
 	
 
 		
-	if Input.is_action_just_pressed("E") and !world.shop:
-		toggle_inventory()
+	#if Input.is_action_just_pressed("E") and !world.shop:
+		#toggle_inventory()
 
 	
 	if event is InputEventMouseButton and !world.shop:

@@ -23,6 +23,7 @@ func _on_hp_button_pressed() -> void:
 func _on_atk_button_pressed() -> void:
 	player.attack_damage += 25
 	_start_game()
+	
 
 func _start_game():
 	# 🔥 ESTO ES LO IMPORTANTE
