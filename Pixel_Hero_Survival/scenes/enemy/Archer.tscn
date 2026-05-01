@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://0g50ua6nypjf"]
+[gd_scene format=3 uid="uid://0g50ua6nypjf"]
 
 [ext_resource type="Script" uid="uid://cw4mb6lnrr5s7" path="res://scenes/enemy/archer.gd" id="1_yoc38"]
 [ext_resource type="Texture2D" uid="uid://2j1noy0rchh8" path="res://art/Factions/Knights/Troops/Archer/Blue/Archer_Blue.png" id="2_yoc38"]
@@ -226,12 +226,14 @@ bg_color = Color(0.858579, 0, 0.166135, 1)
 radius = 16.0
 height = 32.0
 
-[node name="Archer" type="CharacterBody2D"]
+[node name="Archer" type="CharacterBody2D" unique_id=286632039]
 collision_layer = 2
 collision_mask = 25
 script = ExtResource("1_yoc38")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=29025645]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1836670765]
 y_sort_enabled = true
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_pul1y")
@@ -241,22 +243,22 @@ frame = 7
 frame_progress = 1.0
 offset = Vector2(0, -10)
 
-[node name="AreaAttack" type="Area2D" parent="."]
+[node name="AreaAttack" type="Area2D" parent="." unique_id=300290632]
 scale = Vector2(-1, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAttack" unique_id=631782659]
 shape = SubResource("CircleShape2D_5w24h")
 one_way_collision_margin = 0.0
 debug_color = Color(0.921468, 0.23476, 0.392542, 0.42)
 
-[node name="Components" type="Node" parent="."]
+[node name="Components" type="Node" parent="." unique_id=1549124682]
 
-[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("progress_bar") instance=ExtResource("4_osjbi")]
+[node name="HealthComponent" parent="Components" unique_id=1013484460 node_paths=PackedStringArray("progress_bar") instance=ExtResource("4_osjbi")]
 position = Vector2(2, -59)
 script = ExtResource("5_kvvrw")
 progress_bar = NodePath("../../ProgressBar")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=824087621]
 z_index = 90
 y_sort_enabled = true
 offset_left = -25.0
@@ -268,13 +270,13 @@ theme_override_styles/background = SubResource("StyleBoxFlat_ft8do")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5wwv6")
 show_percentage = false
 
-[node name="AudioStreamPlayerATK" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayerATK" type="AudioStreamPlayer" parent="." unique_id=1694410255]
 stream = ExtResource("6_scjs8")
 
-[node name="shooting_point" type="Node2D" parent="."]
+[node name="shooting_point" type="Node2D" parent="." unique_id=1671850307]
 position = Vector2(0, -4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1849346008]
 position = Vector2(1, -3)
 shape = SubResource("CapsuleShape2D_5w24h")
 debug_color = Color(0.540203, 0.567474, 3.85046e-07, 0.42)

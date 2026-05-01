@@ -29,9 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bcnmkpxwu5vym" path="res://scenes/ally/building/Tower_Purple.tscn" id="33_b64vv"]
 [ext_resource type="PackedScene" uid="uid://d4baxbfb7rfxk" path="res://scenes/enemy/building/WoodTowerYellow.tscn" id="35_2pad8"]
 [ext_resource type="PackedScene" uid="uid://dl40t0ki15dk" path="res://scenes/FX/Bonfire.tscn" id="35_e4yt5"]
-[ext_resource type="PackedScene" uid="uid://cqgpkrpsqs1gc" path="res://scenes/ally/Captain.tscn" id="35_x70b3"]
 [ext_resource type="PackedScene" uid="uid://2r1n84se0o67" path="res://scenes/enemy/building/GoblinHouseYellow.tscn" id="36_e4yt5"]
-[ext_resource type="PackedScene" uid="uid://tidmqnioh48s" path="res://scenes/ally/Shaman.tscn" id="36_x70b3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_aqlsr"]
 vertices = PackedVector2Array(4980.97, 4976, 14, 4976, 13, 12.9922, 4966.03, 10)
@@ -695,13 +693,6 @@ position = Vector2(4596.299, 578.9319)
 
 [node name="Fortress" parent="." unique_id=872328722 instance=ExtResource("29_n2fr6")]
 position = Vector2(632, 623)
-
-[node name="Captain" parent="." unique_id=519278621 instance=ExtResource("35_x70b3")]
-position = Vector2(4138, 1469)
-scale = Vector2(-1, 1)
-
-[node name="Shaman" parent="." unique_id=1720527912 instance=ExtResource("36_x70b3")]
-position = Vector2(2071, 4294)
 
 [connection signal="timeout" from="Seconds" to="." method="_on_seconds_timeout"]
 [connection signal="timeout" from="Wave_Cooldown" to="." method="_on_wave_cooldown_timeout"]

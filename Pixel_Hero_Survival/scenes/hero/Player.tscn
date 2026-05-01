@@ -573,6 +573,9 @@ collision_mask = 15
 script = ExtResource("1_3li8b")
 projectile_scene = ExtResource("2_s2xcf")
 
+[node name="HP_Reg" type="Timer" parent="." unique_id=1589641345]
+autostart = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=328344518]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_gp031")
@@ -664,6 +667,7 @@ offset_bottom = 43.0
 scale = Vector2(0.5, 0.5)
 columns = 3
 
+[connection signal="timeout" from="HP_Reg" to="." method="_on_hp_reg_timeout"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="INV" to="INV" method="_on_area_entered"]
 [connection signal="item_added" from="INV" to="CanvasLayer/InventoryUI" method="_on_inv_item_added"]

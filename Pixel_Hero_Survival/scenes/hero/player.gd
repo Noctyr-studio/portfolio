@@ -31,6 +31,7 @@ class_name Player extends Info
 @onready var nodo: Node2D = $Flames
 @onready var inventory_tween: Tween = create_tween()
 
+@onready var hp_reg: Timer = $HP_Reg
 
 
 
@@ -57,6 +58,11 @@ func _ready() -> void:
 	
 	#canvas_layer.hide()
 
+
+func _on_hp_reg_timeout() -> void:
+	if world.hp < world.hpMax:
+		world.hp = min(world.hp + world.hpReg, world.hpMax)
+				
 func level_up():
 	get_tree().paused = true
 	world.exp = 0 

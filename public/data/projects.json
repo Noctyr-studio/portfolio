@@ -19,7 +19,7 @@
     "id": 2,
     "title": "Pixel Hero Survival",
     "description": "Fast-paced 2D survival roguelike focused on responsiveness and real-time gameplay feedback.",
-    "image": "/img/cover_image.jpg",
+    "image": "/img/cover_image.png",
     "keyFeatures": [
       "Real-time combat and damage system",
       "Enemy behavior and wave spawning logic",

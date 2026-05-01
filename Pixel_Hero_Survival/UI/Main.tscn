@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://0x1fkar36bkx"]
+[gd_scene format=3 uid="uid://0x1fkar36bkx"]
 
 [ext_resource type="Script" uid="uid://peqvsdoswhbg" path="res://UI/main.gd" id="1_6vb77"]
 [ext_resource type="Texture2D" uid="uid://brdfm8hrhy1v0" path="res://UI/Background.png" id="2_dcm1j"]
 [ext_resource type="AudioStream" uid="uid://dfe3r2muhfcar" path="res://sound/SFX/07_human_atk_sword_2.wav" id="3_crsyg"]
 [ext_resource type="Texture2D" uid="uid://bjmd1s2hs3v8s" path="res://art/UI/Pointers/02.png" id="4_crsyg"]
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="Control" unique_id=27147341]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6vb77")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2134090083]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_dcm1j")
 
-[node name="Main" type="Control" parent="."]
+[node name="Main" type="Control" parent="." unique_id=2069022781]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -38,7 +38,7 @@ offset_bottom = 242.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="MenuButton" parent="Main"]
+[node name="Play" type="MenuButton" parent="Main" unique_id=435528591]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,7 +56,7 @@ theme_override_font_sizes/font_size = 50
 text = "Play
 "
 
-[node name="Volume" type="MenuButton" parent="Main"]
+[node name="Volume" type="MenuButton" parent="Main" unique_id=2114749262]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,7 +74,7 @@ theme_override_font_sizes/font_size = 50
 text = "Volume
 "
 
-[node name="Credits" type="MenuButton" parent="Main"]
+[node name="Credits" type="MenuButton" parent="Main" unique_id=1069626290]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -92,13 +92,13 @@ theme_override_font_sizes/font_size = 50
 text = "Credits
 "
 
-[node name="Volume" type="Control" parent="."]
+[node name="Volume" type="Control" parent="." unique_id=1120995508]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VolumeBack" type="MenuButton" parent="Volume"]
+[node name="VolumeBack" type="MenuButton" parent="Volume" unique_id=897127764]
 layout_mode = 0
 offset_left = 479.0
 offset_top = 357.0
@@ -109,7 +109,7 @@ theme_override_font_sizes/font_size = 50
 text = "Back
 "
 
-[node name="MusicLabel" type="Label" parent="Volume"]
+[node name="MusicLabel" type="Label" parent="Volume" unique_id=1515676407]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -125,7 +125,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Music"
 
-[node name="Music" type="HSlider" parent="Volume"]
+[node name="Music" type="HSlider" parent="Volume" unique_id=1793391633]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -140,7 +140,7 @@ grow_horizontal = 2
 grow_vertical = 2
 value = 50.0
 
-[node name="SFXLabel" type="Label" parent="Volume"]
+[node name="SFXLabel" type="Label" parent="Volume" unique_id=1910550514]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.499
@@ -156,7 +156,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "SFX"
 
-[node name="SFX" type="HSlider" parent="Volume"]
+[node name="SFX" type="HSlider" parent="Volume" unique_id=335851862]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,14 +171,14 @@ grow_horizontal = 2
 grow_vertical = 2
 value = 50.0
 
-[node name="ApplyButtonVOL" type="Button" parent="Volume"]
+[node name="ApplyButtonVOL" type="Button" parent="Volume" unique_id=1438457548]
 layout_mode = 0
 offset_left = 532.0
 offset_top = 334.0
 offset_right = 616.0
 offset_bottom = 365.0
 
-[node name="ApplyLabel" type="Label" parent="Volume/ApplyButtonVOL"]
+[node name="ApplyLabel" type="Label" parent="Volume/ApplyButtonVOL" unique_id=425095098]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -194,14 +194,14 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Apply"
 
-[node name="RestoreButtonVOL" type="Button" parent="Volume"]
+[node name="RestoreButtonVOL" type="Button" parent="Volume" unique_id=1294790333]
 layout_mode = 0
 offset_left = 634.0
 offset_top = 333.0
 offset_right = 735.0
 offset_bottom = 367.0
 
-[node name="RestoreLabel" type="Label" parent="Volume/RestoreButtonVOL"]
+[node name="RestoreLabel" type="Label" parent="Volume/RestoreButtonVOL" unique_id=1581497336]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -217,14 +217,14 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 text = "Restore"
 
-[node name="SFX TEST" type="Button" parent="Volume"]
+[node name="SFX TEST" type="Button" parent="Volume" unique_id=462874060]
 layout_mode = 0
 offset_left = 683.0
 offset_top = 251.0
 offset_right = 789.0
 offset_bottom = 279.0
 
-[node name="Label" type="Label" parent="Volume/SFX TEST"]
+[node name="Label" type="Label" parent="Volume/SFX TEST" unique_id=539262201]
 layout_mode = 0
 offset_left = 11.0
 offset_top = -3.0
@@ -232,11 +232,11 @@ offset_right = 105.0
 offset_bottom = 29.0
 text = "Sound Effect "
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Volume/SFX TEST"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Volume/SFX TEST" unique_id=150584844]
 stream = ExtResource("3_crsyg")
 bus = &"SFX"
 
-[node name="Credits" type="Control" parent="."]
+[node name="Credits" type="Control" parent="." unique_id=1254914130]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -251,7 +251,7 @@ offset_bottom = 242.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Credits"]
+[node name="Label" type="Label" parent="Credits" unique_id=716377951]
 layout_mode = 0
 offset_right = 405.0
 offset_bottom = 207.0
@@ -262,7 +262,7 @@ https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack
 MENU BACKGROUND
 https://edermunizz.itch.io/free-pixel-art-forest"
 
-[node name="CreditsBack" type="MenuButton" parent="Credits"]
+[node name="CreditsBack" type="MenuButton" parent="Credits" unique_id=1062659714]
 layout_mode = 0
 offset_top = 250.0
 offset_right = 317.0
@@ -272,20 +272,36 @@ theme_override_font_sizes/font_size = 50
 text = "Back
 "
 
-[node name="Fullscreen" type="Control" parent="."]
+[node name="Fullscreen" type="Control" parent="." unique_id=1935913383]
 anchors_preset = 0
 offset_left = 481.5
 offset_top = 118.0
 offset_right = 521.5
 offset_bottom = 158.0
 
-[node name="FullscreenButton" type="TextureButton" parent="Fullscreen"]
+[node name="FullscreenButton" type="TextureButton" parent="Fullscreen" unique_id=296091044]
 layout_mode = 0
 offset_left = 691.5
 offset_top = -90.0
 offset_right = 755.5
 offset_bottom = -26.0
 texture_normal = ExtResource("4_crsyg")
+
+[node name="VersionLabel" type="Label" parent="Fullscreen" unique_id=969826273]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 505.5
+offset_top = 518.0
+offset_right = 749.5
+offset_bottom = 566.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "v0.1.0 — Noctyr Studio"
 
 [connection signal="pressed" from="Main/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Main/Volume" to="." method="_on_volume_pressed"]

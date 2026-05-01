@@ -10,9 +10,8 @@ extends CanvasLayer
 func _ready() -> void:
 	visible = true
 
-
-func _on_gold_button_pressed() -> void:
-	world.gold += 200
+func _on_hp_reg_button_pressed() -> void:
+	world.hpReg += 1
 	_start_game()
 
 func _on_hp_button_pressed() -> void:

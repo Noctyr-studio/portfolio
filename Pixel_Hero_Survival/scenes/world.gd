@@ -13,6 +13,7 @@ const ARCHER = preload("uid://0g50ua6nypjf")
 var hp : int
 var hpMax : int
 var hpDmg : int
+var hpReg : int
 var exp : int
 var lvl : int
 
@@ -49,9 +50,14 @@ func _ready() -> void:
 	get_tree().paused = true
 
 func new_game():	
+	
+	get_tree().paused = true
+	level_up_menu.show()
+	
 	get_tree().call_group("items", "queue_free") 
 	hpMax = 100
 	hp = 100
+	hpReg = 0
 	exp = 0
 	lvl = 1
 	health_multiplier = 1.0
@@ -102,6 +108,7 @@ func is_wave_completed():
 	
 
 func _physics_process(_delta: float) -> void:
+	
 	hpDmg = (hpMax - hp) 
 	$HUD/HP_Label.text = "HP: " + str(hp) + "/" + str(hpMax)
 	$HUD/Exp_Label.text = "EXP : " + str(exp)
@@ -142,20 +149,16 @@ func reset():
 	$HUD/Minutes.text = str(min) + " :"
 	$HUD/Seconds.text = str(sec)
 	$GameScore.hide()	
-	get_tree().paused = false
+	
 
 
-# func show_next_wave_info():
-# 	var text = "Oleada %d -> Enemigos: %d | Vida x%.2f | Daño x%.2f" % [
-# 	wave, max_enemies, health_multiplier, damage_multiplier
-# 	]
-# 	wave_label.text = text
+
 
 ### 🔥 Generador de enemigos con spawn seguro ###
 func spawn_wave_enemies() -> void:
 	# --- CONFIG ---
-	var min_distance_from_player: float = 400.0
-	var max_distance_from_player: float = 900.0
+	var min_distance_from_player: float = 2000.0
+	var max_distance_from_player: float = 4000.0
 
 	# límites del área jugable (ajustalos a tu mapa real)
 	var map_min: Vector2 = Vector2(200, 200)

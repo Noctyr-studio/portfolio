@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b8r8ryfxlorh1" path="res://UI/startMenu.gd" id="1_bo5hi"]
 [ext_resource type="Texture2D" uid="uid://d010jcospqex4" path="res://art/UI/Banners/Carved_9Slides.png" id="2_8gori"]
 [ext_resource type="AudioStream" uid="uid://gvxbpaccrdmi" path="res://sound/Music/Goblins_Den__Regular_.mp3" id="3_8gori"]
-[ext_resource type="Texture2D" uid="uid://cp7oapq7yws3d" path="res://art/Deco/G_Idle 64 X 64.png" id="4_mgr47"]
+[ext_resource type="Texture2D" uid="uid://4uaoteuw51uc" path="res://art/UI/Ribbons/Ribbon_Blue_Connection_Up_Pressed.png" id="4_airwe"]
 [ext_resource type="Texture2D" uid="uid://c2mk7abve4gru" path="res://art/UI/Ribbons/Ribbon_Red_Connection_Left.png" id="5_cyaua"]
 [ext_resource type="Texture2D" uid="uid://bju43nffmex5" path="res://art/UI/Pointers/01.png" id="6_34yav"]
 
@@ -42,28 +42,28 @@ grow_vertical = 2
 scale = Vector2(2.4499986, 0.85)
 texture = ExtResource("2_8gori")
 
-[node name="GoldButton" type="Button" parent="." unique_id=1992199989]
-offset_left = 460.0
+[node name="HP_RegButton" type="Button" parent="." unique_id=1992199989]
+offset_left = 452.0
 offset_top = 286.0
 offset_right = 592.0
 offset_bottom = 384.0
 
-[node name="Label" type="Label" parent="GoldButton" unique_id=959934247]
+[node name="Label" type="Label" parent="HP_RegButton" unique_id=959934247]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 51.0
-offset_right = 108.0
-offset_bottom = 83.0
-text = "200 Gold"
+offset_left = 30.0
+offset_top = 58.0
+offset_right = 101.0
+offset_bottom = 90.0
+text = "+1 HP/sec"
 
-[node name="TextureRect" type="TextureRect" parent="GoldButton" unique_id=822164969]
+[node name="TextureRect" type="TextureRect" parent="HP_RegButton" unique_id=822164969]
 layout_mode = 0
-offset_left = 41.0
+offset_left = 37.0
 offset_top = 6.0
-offset_right = 105.0
+offset_right = 109.0
 offset_bottom = 70.0
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("4_mgr47")
+texture = ExtResource("4_airwe")
 
 [node name="HPButton" type="Button" parent="." unique_id=65564789]
 offset_left = 600.0
@@ -73,10 +73,10 @@ offset_bottom = 385.0
 
 [node name="Label" type="Label" parent="HPButton" unique_id=377998051]
 layout_mode = 0
-offset_left = 41.0
-offset_top = 53.0
-offset_right = 86.0
-offset_bottom = 85.0
+offset_left = 42.0
+offset_top = 59.0
+offset_right = 87.0
+offset_bottom = 91.0
 text = "50 HP"
 
 [node name="TextureRect" type="TextureRect" parent="HPButton" unique_id=945249854]
@@ -96,21 +96,21 @@ offset_bottom = 385.0
 
 [node name="Label" type="Label" parent="ATKButton" unique_id=1360094404]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 55.0
-offset_right = 119.0
-offset_bottom = 87.0
+offset_left = 42.0
+offset_top = 60.0
+offset_right = 92.0
+offset_bottom = 92.0
 text = "25 ATK"
 
 [node name="TextureRect" type="TextureRect" parent="ATKButton" unique_id=2068705648]
 layout_mode = 0
 offset_left = 38.0
 offset_top = 7.0
-offset_right = 102.0
-offset_bottom = 71.0
+offset_right = 111.333374
+offset_bottom = 87.0
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_34yav")
 
-[connection signal="pressed" from="GoldButton" to="." method="_on_gold_button_pressed"]
+[connection signal="pressed" from="HP_RegButton" to="." method="_on_hp_reg_button_pressed"]
 [connection signal="pressed" from="HPButton" to="." method="_on_hp_button_pressed"]
 [connection signal="pressed" from="ATKButton" to="." method="_on_atk_button_pressed"]

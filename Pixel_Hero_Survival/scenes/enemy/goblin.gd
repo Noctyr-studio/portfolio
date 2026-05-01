@@ -25,7 +25,9 @@ var ITEM = preload("res://inventory/Item.tscn")
 @onready var exp_label = get_node("/root/World/HUD/Exp_Label")
 @onready var lvl_label = get_node("/root/World/HUD/Lvl_Label")
 
-@onready var nav: NavigationAgent2D = $NavigationAgent2D
+
+
+
 @onready var recalc_timer: Timer = $RecalcTimer
 
 @onready var sprite_animation: AnimatedSprite2D = $AnimatedSprite2D
@@ -37,6 +39,9 @@ var ITEM = preload("res://inventory/Item.tscn")
 @onready var fortress = get_node("/root/World/Fortress")
 
 @onready var atk = $AudioStreamPlayerATK
+
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+
 
 
 var move
@@ -74,8 +79,12 @@ func _physics_process(_delta: float) -> void:
 		if not is_attack and player:
 			sprite_animation.play("run")
 
-		var move_direction: Vector2 = (player.position - global_position).normalized()
-
+		#var move_direction: Vector2 = (player.position - global_position).normalized()
+		
+		nav_agent.target_position = player.global_position
+		var next_pos = nav_agent.get_next_path_position()
+		var move_direction: Vector2 = (next_pos - global_position).normalized()
+		
 		# --- REPULSIÓN ENTRE ENEMIGOS ---
 		var repulsion: Vector2 = Vector2.ZERO
 		for other in get_tree().get_nodes_in_group("enemies"):
