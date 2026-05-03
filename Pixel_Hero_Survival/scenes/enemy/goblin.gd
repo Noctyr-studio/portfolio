@@ -123,7 +123,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		HP_label.text = "HP: " + str(world.hp)
 		
 		if world.hp <= 0:
-			world.on_death()	
+			player.on_death()	
 		elif is_attack:
 			attack()
 			

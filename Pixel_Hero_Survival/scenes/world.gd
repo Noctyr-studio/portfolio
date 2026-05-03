@@ -5,6 +5,8 @@ const TECHIE = preload("uid://bx4dicnqdyccp")
 const KNIGHT = preload("uid://de3hhy02tqefk")
 const ARCHER = preload("uid://0g50ua6nypjf")
 
+
+
 @onready var wave_label: Label = $CanvasLayer/WaveLabel
 
 @onready var game_score: CanvasLayer = $"../GameScore"
@@ -51,9 +53,10 @@ func _ready() -> void:
 
 func new_game():	
 	
+	player.alive = true
 	get_tree().paused = true
 	level_up_menu.show()
-	
+	player.sprite_animation.play("idle_L&R")
 	get_tree().call_group("items", "queue_free") 
 	hpMax = 100
 	hp = 100
@@ -157,8 +160,8 @@ func reset():
 ### 🔥 Generador de enemigos con spawn seguro ###
 func spawn_wave_enemies() -> void:
 	# --- CONFIG ---
-	var min_distance_from_player: float = 2000.0
-	var max_distance_from_player: float = 4000.0
+	var min_distance_from_player: float = 1000
+	var max_distance_from_player: float = 2000
 
 	# límites del área jugable (ajustalos a tu mapa real)
 	var map_min: Vector2 = Vector2(200, 200)
@@ -215,13 +218,7 @@ func spawn_wave_enemies() -> void:
 		
 
 
-func on_death():	
-	print("GAME OVER")
-	get_tree().paused = true
-	$GameScore/Title.text = "___ YOU DIED ___ " 
-	$GameScore/Waves.text = "WAVES SURVIVE: " + str(wave-1)
-	$GameScore.show()
-	
+
 	
 func victory():
 	

@@ -1,5 +1,6 @@
 class_name Player extends Info
 
+
 @onready var sprite_animation : AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var player: Player = $"."
@@ -18,6 +19,8 @@ class_name Player extends Info
 
 @onready var exp_label = get_node("/root/World/HUD/Exp_Label")
 @onready var lvl_label = get_node("/root/World/HUD/Lvl_Label")
+#@onready var game_score = get_node("/root/World/GameScore")
+@onready var game_score: CanvasLayer = $"../GameScore"
 
 @onready var atk_1 = $"AudioStreamPlayerATK-1"
 @onready var atk_2 = $"AudioStreamPlayerATK-2"
@@ -43,6 +46,9 @@ var screen_size
 var dash_ready : bool 
 var shout_ready : bool 
 var attack_ready : bool
+
+var alive = true
+
 #var shout_damage = attack_damage *= 2
 
 func _ready() -> void:
@@ -62,6 +68,8 @@ func _ready() -> void:
 func _on_hp_reg_timeout() -> void:
 	if world.hp < world.hpMax:
 		world.hp = min(world.hp + world.hpReg, world.hpMax)
+				
+				
 				
 func level_up():
 	get_tree().paused = true
@@ -84,13 +92,17 @@ func _physics_process(_delta: float) -> void:
 		
 func movement():	
 	var move_direction := Input.get_vector("ui_left","ui_right","ui_up","ui_down")	
+	
+	if not alive:
+		return
+		
 	if !is_attack:
 		if move_direction:
-			
+				
 			down = false
 			up = false
 			velocity = move_direction * move_speed
-			
+				
 			sprite_animation.play("run")
 			if move_direction.x != 0 :
 				sprite_animation.flip_h = move_direction.x < 0
@@ -98,44 +110,65 @@ func movement():
 		elif !down and !up and (Input.is_action_just_released("ui_left") or Input.is_action_just_released("ui_right")): 
 			velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 			sprite_animation.play("idle_L&R")
-			
+				
 		elif Input.is_action_just_released("ui_down"):
 			velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 			sprite_animation.play("idle_down")
 			$"Area_U&D".scale.y = 1 if move_direction.y < 0 else -1
 			down = true
-			
+				
 		elif Input.is_action_just_released("ui_up"):
 			velocity = velocity.move_toward(Vector2.ZERO, move_speed)
 			sprite_animation.play("idle_up")
 			$"Area_U&D".scale.y = -1 if move_direction.y < 0 else 1
 			up = true
-			
-			
+				
+				
 	move_and_slide()
-
+			
+	
 
 		
 func _input(event: InputEvent) -> void:
 	
+	if not alive:
+		return
+
+	if event is InputEventMouseButton and !world.shop:
+		if event.button_index == MOUSE_BUTTON_LEFT and attack_ready:
+			if event.pressed and alive:
+				attack_1()
+
+		elif event.button_index == MOUSE_BUTTON_RIGHT and dash_ready:
+			if event.pressed and alive:
+				attack_2()
+			
 	#if Input.is_action_just_pressed("Space") and dash_ready == true:
 		#dash()
 	
-
-		
 	#if Input.is_action_just_pressed("E") and !world.shop:
 		#toggle_inventory()
 
+func on_death():	
 	
-	if event is InputEventMouseButton and !world.shop:
-		if event.button_index == MOUSE_BUTTON_LEFT and !world.shop and attack_ready:
-			if event.pressed:
-				attack_1()
-										
-		elif event.button_index == MOUSE_BUTTON_RIGHT and !world.shop and dash_ready:
-			if event.pressed :
-				attack_2()	
-
+	alive = false
+	is_attack = false
+	attack_ready = false
+	dash_ready = false
+	velocity = Vector2.ZERO
+	
+	$AnimatedSprite2D.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = true
+	player.sprite_animation.play("death")
+	await get_tree().create_timer(4).timeout
+	
+	print("GAME OVER")
+	
+	$"../GameScore/Title".text = "___ YOU DIED ___ " 
+	$"../GameScore/Waves".text = "WAVES SURVIVE: " + str(world.wave-1)
+	$"../GameScore".show()
+	$AnimatedSprite2D.process_mode = Node.PROCESS_MODE_INHERIT
+	
 func toggle_inventory() -> void:
 	# Si ya hay una animación corriendo, la detiene
 	if inventory_tween and inventory_tween.is_running():
@@ -272,7 +305,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		player_dash.play()
 		
 	
-		
+
+			
 func _on_area_lr_body_entered(body: Node2D) -> void:
 	print(body.name)
 	if body is Enemy:
