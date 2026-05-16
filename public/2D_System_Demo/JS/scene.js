@@ -7,32 +7,32 @@ import { ctx, bgImage, GAME_WIDTH, GAME_HEIGHT } from "./main.js";
 import { Projectile } from "./projectile.js";
 import { keys } from "./main.js";
 
+
 export class Scene {
 
 constructor(){
-this.player = new Player(100,0);
+this.player = new Player(800,0);
 
 this.platforms=[
 new Platform(0,500,4000,40),
-new Platform(1200,350,400,20),
-new Platform(1700,300,400,20),
-new Platform(2250,300,200,20),
+new Platform(400,30,40,2000),
+//new Platform(1700,320,400,20),
 new Platform(2600,250,400,20),
 new Platform(3300,200,100,400)
 
 ];
 
 this.enemies = [
-  new Enemy(800, 380)
+  new Enemy(1500, 380)
 ];
 
 this.projectiles = [];
 
 this.pickups=[
 
-new Pickup(700,400,30,30,"hp",20),
-new Pickup(900,400,30,30,"energy",20),
-new Pickup(2000,400,30,30,"coin",1)
+new Pickup(1200,400,30,30,"hp",20),
+new Pickup(1300,400,30,30,"energy",20),
+new Pickup(2500,400,30,30,"coin",1)
 
 ];
 
@@ -174,7 +174,7 @@ this.enemies.forEach(e => e.draw(ctx, this.cameraX, this.cameraY));
 
 this.drawUI(ctx)
 
-if(this.paused){
+if(this.paused){  // PAUSA //
 
   ctx.fillStyle = "rgba(0,0,0,0.5)";
   ctx.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -184,7 +184,7 @@ if(this.paused){
   ctx.fillText("PAUSED", 200, 200);
 }
 
-if(this.gameOver){
+if(this.gameOver){ // GAME OVER //
 
   ctx.fillStyle = "rgba(0,0,0,0.8)";
   ctx.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -192,19 +192,17 @@ if(this.gameOver){
   ctx.fillStyle = "red";
   ctx.font = "60px monospace";
 
-  ctx.fillText("GAME OVER", 250, 220);
+  ctx.fillText("GAME OVER", 350, 220);
 
   ctx.font = "28px monospace";
 
   ctx.fillText(
     `Coins: ${this.player.stats.coins}`,
-    320,
+    430,
     300
   );
 
-   // ================= BUTTON =================
-
-  const buttonX = GAME_WIDTH / 2 - 100;
+  const buttonX = GAME_WIDTH / 2 - 200;
   const buttonY = 360;
   const buttonW = 200;
   const buttonH = 60;
@@ -226,7 +224,7 @@ if(this.gameOver){
 
 }
 
-if(this.gameDone){
+if(this.gameDone){   // JUEGO COMPLETADO //
 
   ctx.fillStyle = "rgba(0,0,0,0.8)";
   ctx.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
@@ -234,19 +232,17 @@ if(this.gameDone){
   ctx.fillStyle = "green";
   ctx.font = "60px monospace";
 
-  ctx.fillText("YOU WON", 250, 220);
+  ctx.fillText("YOU WON", 400, 220);
 
   ctx.font = "28px monospace";
 
   ctx.fillText(
     `Coins: ${this.player.stats.coins}`,
-    320,
+    430,
     300
   );
 
-     // ================= BUTTON =================
-
-  const buttonX = GAME_WIDTH / 2 - 100;
+  const buttonX = GAME_WIDTH / 2 - 200;
   const buttonY = 360;
   const buttonW = 200;
   const buttonH = 60;
@@ -268,15 +264,20 @@ if(this.gameDone){
 
 }
 
+
+
+
+
 }
 spawnKunai(x, y, dir) {
-  this.projectiles.push(new Projectile(x, y, dir));
-
+  
   if (this.player.stats.energy >0 ){
-    this.player.stats.energy -= 10
+    this.player.stats.energy -= 20
+    this.projectiles.push(new Projectile(x, y, dir));
   }
   else if (this.player.stats.energy <=0 ){
     this.player.stats.energy =0
+    return
 
   }
   
@@ -291,7 +292,7 @@ drawUI(ctx){
   const barWidth = 150;
   const barHeight = 25;
   const margin = 50;
-  const x = 60;
+  const x = 220;
   const y = 20;
 
   const s = this.player.stats;
@@ -344,7 +345,7 @@ drawUI(ctx){
   ctx.fillText(
     s.coins,
     x + 10 +size ,
-    x + size 
+    y +40 + size 
   );
 
   }

@@ -12,7 +12,7 @@ export const WORLD_WIDTH = 6000;
 export const WORLD_HEIGHT = 2000;
 
 export const bgImage = new Image();
-bgImage.src = "Background_01.png";
+bgImage.src = "bg/Background_01.png";
 
 export const keys = {};
 
@@ -48,14 +48,22 @@ canvas.addEventListener("click", e => {
 
 // ==================== IMPORT ====================
 import { Scene } from "./scene.js";
+import { AssetManager } from "./assetManager.js";
 import { LoadingScreen } from "./loadingScreen.js";
+
 
 // ==================== STATE ====================
 let scene = null;
 let gameStarted = false;
 let lastTime = 0;
 
-const loadingScreen = new LoadingScreen();
+
+
+const assets = new AssetManager();
+
+const loader = new LoadingScreen(assets);
+
+await loader.load();
 
 
 // ==================== LOOP ====================
@@ -65,42 +73,38 @@ function gameLoop(time){
 
   ctx.clearRect(0,0,GAME_WIDTH,GAME_HEIGHT);
 
-  if(!gameStarted){
-  loadingScreen.update(dt); // 👈 IMPORTANTE
-  loadingScreen.draw(ctx, GAME_WIDTH, GAME_HEIGHT);
-
-  if(loadingScreen.isDone()){
-    scene = new Scene();
-    gameStarted = true;
+  if (!loader.isDone()) {
+    loader.update(dt);
+    loader.draw(ctx, GAME_WIDTH, GAME_HEIGHT);
+    requestAnimationFrame(gameLoop);
+    return;
   }
 
-  } else {
-    
-    if(keys["escape"] && scene){
+  if (!scene) {
+    requestAnimationFrame(gameLoop);
+    return;
+  }
 
+  if(keys["escape"]){
     scene.paused = !scene.paused;
-
     keys["escape"] = false;
   }
-    scene.update(dt);
-    scene.draw();
-  }
-  
+
+  scene.update(dt);
+  scene.draw();
+
   requestAnimationFrame(gameLoop);
 }
 
-
 // ==================== INIT ====================
-async function init(){
-
-  // ⏳ fake loading (2 seg)
-  await new Promise(r => setTimeout(r, 2000));
+async function bootstrap() {
+  await loader.load();
 
   scene = new Scene();
   gameStarted = true;
+
+  requestAnimationFrame(gameLoop);
 }
 
+bootstrap();
 
-// ==================== START ====================
-init();
-requestAnimationFrame(gameLoop);

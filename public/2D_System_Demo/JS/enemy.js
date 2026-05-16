@@ -7,7 +7,7 @@ export class Enemy extends Entity {
   constructor(x, y){
     super(x, y, 80, 120, {
     
-    hp: 50,
+    hp: 100,
     maxHp: 100
 
     });
@@ -31,7 +31,7 @@ export class Enemy extends Entity {
 
     this.speed = 200;
 
-    this.aggroRange = 300;
+    this.aggroRange = 200;
 
     this.attackRange = 80;
     this.attackBuffer = 20;
@@ -232,14 +232,14 @@ draw(ctx, cameraX, cameraY){
 
     // ================= DEBUG STATE =================
   ctx.fillStyle = "white";
-  ctx.font = "12px monospace";
+  ctx.font = "11px monospace";
 
   const debugText = [
     `state: ${this.state.toUpperCase()}`,
     `anim: ${this.currentAnimation}`,
     `frame: ${this.frameIndex}`,
     `timer: ${this.attackTimer?.toFixed(2) || 0}`,
-    `hitDone: ${this.hitDone}`
+    `hit:${this.hitDone}`
   ];
 
   debugText.forEach((line, i) => {

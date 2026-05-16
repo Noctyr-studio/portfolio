@@ -209,7 +209,7 @@ update(keys, platforms, dt, scene) {
 
       const spawnY =
         this.y + this.h * 0.45;
-
+      
       scene.spawnKunai(
         spawnX,
         spawnY,
@@ -273,14 +273,14 @@ update(keys, platforms, dt, scene) {
 
        // ================= DEBUG STATE =================
     ctx.fillStyle = "white";
-    ctx.font = "12px monospace";
+    ctx.font = "11px monospace";
 
     const debugText = [
       `state: ${this.state.toUpperCase()}`,
       `anim: ${this.currentAnimation}`,
       `frame: ${this.frameIndex}`,
       `timer: ${this.attackTimer?.toFixed(2) || 0}`,
-      `hitDone: ${this.hitDone}`
+      `hit:${this.hitDone}`
     ];
 
     debugText.forEach((line, i) => {
