@@ -1,5 +1,6 @@
 
 
+
 export class LoadingScreen {
 
   constructor(assetManager){
@@ -8,24 +9,20 @@ export class LoadingScreen {
 
     this.progress = 0;
     this.fade = 0;
-
+    this.logo = new Image();
+    this.logo.src = "logo/clean.png";
     this.done = false;
   }
 
+  
   async load(){
 
     await Promise.all([
 
-      // ---------------- IMAGENES ----------------
-      /*this.assets.loadImage("logo", 
-        "clean.png"),
 
-      /* this.assets.loadImage(
-        "bg",
-        "medieval-ruins/Background_01.png"
-      ),*/
-
+      
       // ---------------- NINJA ----------------
+    
 
       this.assets.loadAnimations(
         "ninja",

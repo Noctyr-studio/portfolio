@@ -3,9 +3,12 @@ import { Player } from "./player.js";
 import { Pickup } from "./pickup.js";
 import { Platform } from "./platform.js";
 import { Enemy } from "./enemy.js";
-import { ctx, bgImage, GAME_WIDTH, GAME_HEIGHT } from "./main.js";
+import { ctx, GAME_WIDTH, GAME_HEIGHT } from "./main.js";
 import { Projectile } from "./projectile.js";
 import { keys } from "./main.js";
+
+export const bgImage = new Image();
+bgImage.src = "bg/Background_01.png";
 
 
 export class Scene {
