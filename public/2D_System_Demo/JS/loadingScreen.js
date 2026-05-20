@@ -1,6 +1,5 @@
 
 
-
 export class LoadingScreen {
 
   constructor(assetManager){
@@ -188,6 +187,18 @@ export class LoadingScreen {
         "Press ENTER",
         width / 2,
         height / 2 + 120
+      );
+
+      ctx.globalAlpha = 1;
+
+      ctx.fillStyle = "rgba(255,255,255,0.55)";
+      ctx.font = "20px monospace";
+      ctx.textAlign = "center";
+
+      ctx.fillText(
+        "Abyssal Maker - v0.1.0",
+        width / 2,
+        height - 100
       );
 
       ctx.restore();
