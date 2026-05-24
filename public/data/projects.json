@@ -13,7 +13,8 @@
       "HTML / CSS",
       "JavaScript (Vanilla)"
     ],
-    "link": "https://arkangel-96.itch.io/abyssal-maker-gameplay-runtime-js"
+    "link": "https://noctyr-studio.itch.io/abyssal-maker-gameplay-runtime-js"
+    
   },
   {
     "id": 2,
@@ -29,23 +30,6 @@
       "Godot",
       "GDScript (Python)"
     ],
-    "link": "https://arkangel-96.itch.io/pixel-hero-survival"
-  },
-  {
-    "id": 3,
-    "title": "Noctyr Analytics™",
-    "description": "Exploratory analysis of SaaS business models focused on product positioning, growth dynamics and data-driven insights.",
-    "image": "/img/analytics.png",
-    "keyFeatures": [
-      "Data exploration and visualization",
-      "Trend analysis using real-world datasets",
-      "Insights on pricing and product positioning"
-    ],
-    "technologies": [
-      "Python",
-      "Pandas",
-      "Plotly"
-    ],
-    "link": "https://trends.google.es/trends/explore?q=%2Fm%2F06_4c_&hl=es"
+    "link": "https://noctyr-studio.itch.io/pixel-hero-survival"
   }
 ]

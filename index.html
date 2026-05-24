@@ -1,25 +1,34 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>:: | Noctyr Studio | ::</title>
+
+    <title>Noctyr Studio | Games, Web Apps & Applied AI</title>
+
+    <link rel="canonical" href="https://noctyr-studio.com/" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png" />
 
     <meta
       name="description"
-      content="Noctyr Studio is an independent development studio founded by Matías Baltieri, focused on video games, modern web applications, and applied AI solutions. We create immersive interactive experiences combining game development, software engineering, and artificial intelligence."
+      content="Noctyr Studio is an independent development studio founded by Matías Baltieri, focused on video games, modern web applications, and applied AI solutions."
     />
 
     <meta
       name="keywords"
-      content="Noctyr Studio, Matías Baltieri, game development, indie games, web applications, applied AI, artificial intelligence, JavaScript developer, game developer, software engineering, indie studio"
+      content="Noctyr Studio, Matías Baltieri, game development, indie games, web applications, applied AI"
     />
 
     <meta name="author" content="Matías Baltieri" />
 
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Noctyr Studio" />
+
     <meta
       property="og:title"
-      content="Noctyr Studio | Games, Web Apps & Applied AI Development"
+      content="Noctyr Studio | Games, Web Apps & Applied AI"
     />
 
     <meta
@@ -33,7 +42,25 @@
       property="og:url"
       content="https://noctyr-studio.com/"
     />
+
+    <meta
+      property="og:image"
+      content="https://noctyr-studio.com/img/preview.jpg"
+    />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Noctyr Studio",
+      "url": "https://noctyr-studio.com/",
+      "logo": "https://noctyr-studio.com/img/favicon.png"
+    }
+    </script>
+
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
