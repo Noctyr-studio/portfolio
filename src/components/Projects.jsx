@@ -13,7 +13,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="proyectos" className="border-y border-white/5 bg-neutral-950">
+    <section id="Projects" className=" scroll-mt-3 border-y border-white/5 bg-neutral-950">
       <div className="mx-auto max-w-6xl px-4 py-14">
 
         <div className="flex items-end justify-between gap-4">
@@ -49,10 +49,15 @@ export default function Projects() {
                       {project.title}
                     </a>
 
-                    <p className="mt-4 text-white/90 text-lg leading-relaxed">
+                    <p className="mt-4 text-white/90 italic text-lg leading-relaxed">
                       {project.description}
                     </p>
+                    <br />
+                    <p className="text-2xl font-bold ">
+                      Core Systems
+                    </p>
                   </div>
+
                   <ul className="mt-4 list-disc list-inside text-white/80 space-y-1">
                     {project.keyFeatures?.map((feature, i) => (
                       <li key={i}>{feature}</li>
@@ -75,7 +80,7 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="inline-block rounded-xl border border-white/20 px-5 py-2 text-sm hover:bg-white/10 transition"
                     >
-                      Ver proyecto →
+                      View Project →
                     </a>
                   </div>
                 </div>

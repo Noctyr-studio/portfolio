@@ -130,11 +130,11 @@ export default function Github() {
   });
 
   return (
-    <section id="github" className="border-y border-white/5 bg-neutral-950">
+    <section id="Activity" className=" scroll-mt-10 border-y border-white/5 bg-neutral-950">
       <div className="mx-auto max-w-6xl px-4 py-14">
-        <h2 className="text-2xl font-bold">Actividad en GitHub</h2>
+        <h2 className="text-2xl font-bold">GitHub Activity</h2>
         <p className="mt-2 text-white/70">
-          Constancia y práctica real en proyectos personales.
+          Consistency and real-world practice through personal projects.
         </p>
 
         <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 p-4">
@@ -151,7 +151,7 @@ export default function Github() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl bg-indigo-500/90 px-4 py-2 text-sm font-semibold hover:bg-indigo-400 transition"
           >
-            Ver mi perfil en GitHub
+            View my GitHub profile
           </a>
         </div>
       </div>

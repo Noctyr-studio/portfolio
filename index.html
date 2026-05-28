@@ -4,12 +4,14 @@
   <head>
     <meta charset="UTF-8" />
 
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- SEO -->
     <title>Noctyr Studio | Games, Web Apps & Applied AI</title>
-
-    <link rel="canonical" href="https://noctyr-studio.com/" />
-
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png" />
 
     <meta
       name="description"
@@ -23,7 +25,18 @@
 
     <meta name="author" content="Matías Baltieri" />
 
+    <link rel="canonical" href="https://noctyr-studio.com/" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon.png" />
+
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon.png" />
+
+    <link rel="icon" type="image/png" sizes="512x512" href="/img/favicon.png" />
+
     <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+
     <meta property="og:site_name" content="Noctyr Studio" />
 
     <meta
@@ -36,8 +49,6 @@
       content="Independent development studio creating games, web applications, and applied AI experiences."
     />
 
-    <meta property="og:type" content="website" />
-
     <meta
       property="og:url"
       content="https://noctyr-studio.com/"
@@ -48,21 +59,42 @@
       content="https://noctyr-studio.com/img/preview.jpg"
     />
 
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta
+      name="twitter:title"
+      content="Noctyr Studio | Games, Web Apps & Applied AI"
+    />
+
+    <meta
+      name="twitter:description"
+      content="Independent development studio creating games, web applications, and applied AI experiences."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://noctyr-studio.com/img/preview.jpg"
+    />
+
     <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Noctyr Studio",
-      "url": "https://noctyr-studio.com/",
-      "logo": "https://noctyr-studio.com/img/favicon.png"
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Matías Baltieri",
+        "url": "https://noctyr-studio.com/",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Noctyr Studio"
+        }
+      }
     </script>
-
   </head>
 
   <body>
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

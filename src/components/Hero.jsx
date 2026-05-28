@@ -12,24 +12,24 @@ export default function Hero() {
             `
         }}
         >
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:py-20 md:py-28">
+      <div id="Home" className="mx-auto max-w-6xl px-4 py-16 sm:py-20 md:py-28">
         
         <div className="grid items-center gap-10 md:grid-cols-[1.2fr_.8fr]">
           
           {/* TEXTO */}
           <div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
-              Hola, soy{" "}
+              Hi, I'm {" "}
               <span className="bg-gradient-to-br from-green-500 via-violet-600 to-orange-500 bg-clip-text text-transparent">
                 Matías
-              </span>.
+              </span>
             </h1>
             <br />
             <p className="mt-4 max-w-2xl text-lg text-white/80">
               <strong>Fullstack JavaScript Developer | Product-Focused</strong>
               <br /><br />
-              Creo experiencias interactivas y productos donde diseño, UX y lógica trabajan en conjunto. 
-              Me enfoco en construir sistemas que no solo funcionen, sino que se sientan bien al usarse.
+              I create interactive experiences and products where design, UX, and logic work together. 
+              I focus on building systems that not only work, but also feel good to use.
             </p>
             
             {/* ICONOS */}

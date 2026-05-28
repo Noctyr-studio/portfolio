@@ -1,30 +1,31 @@
 [
   {
     "id": 1,
-    "title": "Abyssal Maker™ — Gameplay Runtime (JS)",
-    "description": "Experimental web-based gameplay runtime focused on modular, system-driven architecture. Core systems implemented from scratch.",
+    "title": "Sword & Knife",
+    "description": "A 2D Web Action Game built entirely from scratch",
     "image": "/img/abyssal_maker.png",
     "keyFeatures": [
-      "Entity system architecture",
-      "Combat and damage pipeline",
-      "Animation and game loop management"
+      "Modular gameplay architecture",
+      "Combat & damage pipeline",
+      "Animation state management",
+      "Custom game loop"
     ],
     "technologies": [
       "HTML / CSS",
       "JavaScript (Vanilla)"
     ],
-    "link": "https://noctyr-studio.itch.io/abyssal-maker-gameplay-runtime-js"
+    "link": "https://noctyr-studio.itch.io/sword-knife-2d-web-action-game"
     
   },
   {
     "id": 2,
     "title": "Pixel Hero Survival",
-    "description": "Fast-paced 2D survival roguelike focused on responsiveness and real-time gameplay feedback.",
+    "description": "Fast-paced 2D survival roguelike focused on responsive combat and real-time gameplay feedback",
     "image": "/img/cover_image.png",
     "keyFeatures": [
-      "Real-time combat and damage system",
-      "Enemy behavior and wave spawning logic",
-      "Player feedback systems (health, hit response, death)"
+      "Real-time combat & damage system",
+      "Enemy AI and wave spawning logic",
+      "Health, damage, and death feedback system"
     ],
     "technologies": [
       "Godot",
