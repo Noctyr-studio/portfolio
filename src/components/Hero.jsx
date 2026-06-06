@@ -26,7 +26,7 @@ export default function Hero() {
             </h1>
             <br />
             <p className="mt-4 max-w-2xl text-lg text-white/80">
-              <strong>Fullstack JavaScript Developer | Product-Focused</strong>
+              <strong>Developer & Digital Creator | Web Apps, Games & Applied AI</strong>
               <br /><br />
               I create interactive experiences and products where design, UX, and logic work together. 
               I focus on building systems that not only work, but also feel good to use.
@@ -69,7 +69,7 @@ export default function Hero() {
 
               {/* LinkedIn */}
               <div className="bg-zinc-800 p-2 rounded-lg transition-all duration-300 hover:bg-blue-400 hover:scale-110 hover:shadow-lg hover:shadow-blue-400/40">
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white">
+                <a href="https://www.linkedin.com/in/mat%C3%ADas-baltieri-6b09662a6/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white">
                   <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
                   </svg>
