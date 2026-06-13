@@ -1,5 +1,9 @@
 
-
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+}
 
 
 // 🪙 create JWT FUNCTION
@@ -126,7 +130,14 @@ async function hashPassword(password: string): Promise<string> {
 
 export default {
   async fetch(request: Request, env: any): Promise<Response> {
-    const url = new URL(request.url)
+  const url = new URL(request.url)
+
+  // CORS PREFLIGHT
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      headers: corsHeaders,
+    })
+  }
 
     // 👉 REGISTER
     if (url.pathname === "/register" && request.method === "POST") {
@@ -142,12 +153,20 @@ export default {
           .run()
 
         return new Response(JSON.stringify({ success: true }), {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
         })
       } catch (e) {
-        return new Response(
-          JSON.stringify({ error: "User already exists" }),
-          { status: 409, headers: { "Content-Type": "application/json" } }
+        return new Response( JSON.stringify({ error: "User already exists" }),
+          {
+            status: 409,
+            headers: {
+              "Content-Type": "application/json",
+              ...corsHeaders,
+            },
+          }
         )
       }
     }
@@ -169,17 +188,23 @@ export default {
           env.JWT_SECRET
         )
 
-        return new Response(
-          JSON.stringify({ success: true, token }),
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        )
+      return new Response(
+        JSON.stringify({ success: true, token }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
+        }
+      )
       }
       
       return new Response(JSON.stringify({ success: false }), {
         status: 401,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
       })
     }
 
@@ -190,6 +215,10 @@ export default {
       if (!auth || !auth.startsWith("Bearer ")) {
         return new Response(JSON.stringify({ error: "No token" }), {
           status: 401,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
         })
       }
 
@@ -200,19 +229,27 @@ export default {
       if (!payload) {
         return new Response(JSON.stringify({ error: "Invalid token" }), {
           status: 401,
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
         })
       }
 
       return new Response(
-        JSON.stringify({
-          email: payload.email,
+        JSON.stringify({         email: payload.email,
         }),
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders,
+          },
         }
       )
     }
     // 👉 ESTE ES EL QUE TE FALTA
-    return new Response("Hello API 🚀")
+    return new Response("Hello API 🚀", {
+      headers: corsHeaders,
+    })
   },
 }

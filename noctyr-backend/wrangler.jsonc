@@ -7,8 +7,7 @@
     "JWT_SECRET": "super-secret-123"
   	},
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "noctyr-backend",
-	"main": "src/index.ts",
+	"name": "noctyr-backend","main": "src/index.ts",
 	"compatibility_date": "2026-04-19",
 	"observability": {
 		"enabled": true
