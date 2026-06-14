@@ -20,8 +20,8 @@ build/
 .wrangler/
 .dev.vars
 .env
-.env.development
-.env.production
+
+
 __pycache__/
 db.sqlite3
 media/
