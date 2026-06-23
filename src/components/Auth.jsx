@@ -1,5 +1,8 @@
 
 import { useState } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
+
+
 
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -19,9 +22,10 @@ export default function Auth({ mode = "login", onClose , setUser}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const API_URL = import.meta.env.VITE_API_URL;
-
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -39,6 +43,11 @@ export default function Auth({ mode = "login", onClose , setUser}) {
       return;
     }
 
+    if (!turnstileToken) {
+      alert("Please complete the captcha");
+      return;
+    }
+    
     const endpoint = isLogin
       ? `${API_URL}/login`
       : `${API_URL}/register`;
@@ -52,6 +61,7 @@ export default function Auth({ mode = "login", onClose , setUser}) {
         body: JSON.stringify({
           email,
           password,
+          turnstileToken,
         }),
       });
 
@@ -315,20 +325,28 @@ export default function Auth({ mode = "login", onClose , setUser}) {
       {/* CAPTCHA placeholder */}
 
       <div
-        className="
-          h-24
-          rounded-xl
-          border
-          border-white/10
-          bg-white/[0.03]
-          flex
-          items-center
-          justify-center
-          text-zinc-500
-        "
-      >
-        CAPTCHA
-      </div>
+      className="
+        rounded-xl
+        border
+        border-white/10
+        bg-white/[0.03]
+        flex
+        items-center
+        justify-center
+        py-4
+      "
+    >
+      <Turnstile
+        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+        onSuccess={(token) => {
+          console.log("Turnstile token:", token);
+          setTurnstileToken(token);
+        }}
+        onExpire={() => {
+          setTurnstileToken("");
+        }}
+      />
+    </div>
 
       <button
         type="submit"

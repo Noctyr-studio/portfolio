@@ -197,6 +197,7 @@ export default {
       const body = (await request.json()) as {
         email: string
         password: string
+        turnstileToken: string
       }
 
       if (!isValidEmail(body.email)) {
@@ -300,9 +301,57 @@ export default {
       const body = (await request.json()) as {
         email: string
         password: string
+        turnstileToken: string
+      }
+
+      if (!body.turnstileToken) {
+        return new Response(
+          JSON.stringify({
+            error: "Captcha required"
+          }),
+          {
+            status: 400,
+            headers: {
+              "Content-Type": "application/json",
+              ...corsHeaders,
+            },
+          }
+        )
       }
       
+      const verifyResponse = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            secret: env.TURNSTILE_SECRET_KEY,
+            response: body.turnstileToken,
+          }),
+        }
+      )
 
+      const verifyData = await verifyResponse.json() as {
+        success: boolean
+      }
+
+      if (!verifyData.success) {
+        return new Response(
+          JSON.stringify({
+            error: "Captcha verification failed"
+          }),
+          {
+            status: 400,
+            headers: {
+              "Content-Type": "application/json",
+              ...corsHeaders,
+            },
+          }
+        )
+      }
+      
       if (!isValidEmail(body.email)) {
         return new Response(
           JSON.stringify({
