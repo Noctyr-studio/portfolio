@@ -108,17 +108,19 @@ export default function Auth({ mode = "login", onClose , setUser}) {
   return (
     <div
       className="
-        fixed
-        inset-0
-        z-50
-        flex
-        items-center
-        justify-center
-        bg-black/90
-        backdrop-blur-sm
-        overflow-y-auto
-        p-6
-      "
+      fixed
+      inset-0
+      z-50
+      flex
+      items-start
+      justify-center
+      bg-black/90
+      backdrop-blur-sm
+      overflow-y-auto
+      p-6
+      pt-10
+      pb-10
+    "
       onClick={onClose}
     >
 
@@ -172,13 +174,13 @@ export default function Auth({ mode = "login", onClose , setUser}) {
     relative
     z-10
     w-full
-    max-w-md
+    max-w-sm
     rounded-3xl
     border
     border-white/10
     bg-neutral-950/80
     backdrop-blur-xl
-    p-8
+    p-6
   "
   onClick={(e) => e.stopPropagation()}
 >
@@ -186,8 +188,8 @@ export default function Auth({ mode = "login", onClose , setUser}) {
     onClick={onClose}
     className="
       absolute
-      top-4
-      right-4
+      top-1
+      right-2
       text-zinc-400
       hover:text-white
       transition

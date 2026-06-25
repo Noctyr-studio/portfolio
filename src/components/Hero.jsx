@@ -18,20 +18,22 @@ export default function Hero() {
           
           {/* TEXTO */}
           <div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
+            <h1 className="text-3xl  text-white/90  sm:text-4xl md:text-5xl font-black leading-tight">
               Hi, I'm {" "}
               <span className="bg-gradient-to-br from-green-500 via-violet-600 to-orange-500 bg-clip-text text-transparent">
                 Matías
               </span>
             </h1>
             <br />
-            <p className="mt-4 max-w-2xl text-lg text-white/80">
-              <strong>Software Developer | Web Apps, Games & Applied AI</strong>
-              <br /><br />
-              I create interactive experiences and products where design, UX, and logic work together. 
-              I focus on building systems that not only work, but also feel good to use.
-            </p>
-            
+        <h1 className="text-2xl font-bold leading-tight text-white/90 sm:text-4xl md:text-5xl">
+          Full Stack & Backend Developer
+        </h1>
+
+        <p className="mt-4 text-xl font-bold tracking-wide text-white/60 sm:text-2xl md:text-2xl">
+
+          TypeScript · React · REST APIs · Serverless
+        </p>
+                        
             {/* ICONOS */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-10">
               
