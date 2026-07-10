@@ -26,14 +26,12 @@ export default function Hero() {
             </h1>
             <br />
         <h1 className="text-2xl font-bold leading-tight text-white/90 sm:text-4xl md:text-5xl">
-          Full Stack & Backend Developer
+          Full Stack & Game Developer
         </h1>
 
-        <p className="mt-4 text-xl font-bold tracking-wide text-white/60 sm:text-2xl md:text-2xl">
-
-          TypeScript · React · REST APIs · Serverless
+       <p className="mt-4 text-xl font-bold tracking-wide text-white/60 sm:text-2xl md:text-2xl">
+          JavaScript · React · Unity · Godot · Python <br /> REST APIs · Serverless 
         </p>
-                        
             {/* ICONOS */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-10">
               

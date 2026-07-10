@@ -32,5 +32,22 @@
       "GDScript (Python)"
     ],
     "link": "https://noctyr-studio.itch.io/pixel-hero-survival"
+  },
+  {
+    "id": 3,
+    "title": "Magic Academy",
+    "description": "A fantasy academy web application developed from scratch with vanilla frontend technologies. The project showcases frontend fundamentals and will be expanded with a Python backend for dynamic content management.",
+    "image": "/img/castle.jpeg",
+    "keyFeatures": [
+      "Custom fantasy UI design",
+      "Responsive web experience",
+      "Interactive content powered by JavaScript",
+      "Future Python backend and database integration"
+    ],
+      "technologies": [
+      "HTML / CSS",
+      "JavaScript (Vanilla)"
+    ],
+    "link": "https://magic-academy-eight.vercel.app/"
   }
 ]
