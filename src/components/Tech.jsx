@@ -5,11 +5,12 @@ const techs = [
   { name: "Tailwind", link: "https://tailwindcss.com/" },
   { name: "React", link: "https://react.dev/" },
   { name: "TypeScript", link: "https://www.typescriptlang.org/" },
-  { name: "Node.js", link: "https://nodejs.org/" },
   { name: "Cloudflare", link: "https://www.cloudflare.com/" },
+  { name: "Python", link: "https://www.python.org/" },
   { name: "Godot", link: "https://godotengine.org/" },
-  { name: "PostgreSQL", link: "https://www.postgresql.org/" },
-   // { name: "Python", link: "https://www.python.org/" },
+  { name: "Unity", link: "https://unity.com/" },
+   // { name: "PostgreSQL", link: "https://www.postgresql.org/" },
+   // { name: "Node.js", link: "https://nodejs.org/" },
 ];
 
 export default function Tech() {
