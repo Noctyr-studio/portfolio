@@ -90,7 +90,7 @@ export default function Hero() {
 
               {/* Instagram*/}
               <div className="bg-zinc-800 p-2 rounded-lg transition-all duration-300 hover:bg-orange-400 hover:scale-110 hover:shadow-lg hover:shadow-orange-400/40">
-                <a href="https://www.instagram.com/noctyr.studio/" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-white">
+                <a href="https://www.instagram.com/maty.baltieri/" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-white">
                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 32 32" id="Camada_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <path d="M22.3,8.4c-0.8,0-1.4,0.6-1.4,1.4c0,0.8,0.6,1.4,1.4,1.4c0.8,0,1.4-0.6,1.4-1.4C23.7,9,23.1,8.4,22.3,8.4z 
                   M16,10.2c-3.3,0-5.9,2.7-5.9,5.9s2.7,5.9,5.9,5.9s5.9-2.7,5.9-5.9S19.3,10.2,16,10.2z M16,19.9c-2.1,0-3.8-1.7-3.8-3.8   c0-2.1,1.7-3.8,3.8-3.8c2.1,0,3.8,1.7,3.8,3.8C19.8,18.2,18.1,19.9,16,19.9z 
