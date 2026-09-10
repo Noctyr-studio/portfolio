@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Auth from "./components/Auth";
 import Profile from "./components/Profile";
+import ResetPassword from "./components/ResetPassword";
 
 import { useEffect, useState } from "react";
 
@@ -84,6 +85,13 @@ useEffect(() => {
   }
 }, [user, pendingView]);
 
+  const isResetPassword =
+    window.location.pathname === "/reset-password";
+
+  if (isResetPassword) {
+    return <ResetPassword />;
+  }
+  
     return (
     <>
       <Navbar

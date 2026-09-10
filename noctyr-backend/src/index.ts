@@ -179,7 +179,24 @@ async function hashPassword(
   )
 }
 
+async function hashToken(token: string): Promise<string> {
+  const data = encoder.encode(token)
 
+  const hash = await crypto.subtle.digest(
+    "SHA-256",
+    data
+  )
+
+  return bytesToHex(new Uint8Array(hash))
+}
+
+function generateResetToken(): string {
+  const bytes = crypto.getRandomValues(
+    new Uint8Array(32)
+  )
+
+  return bytesToHex(bytes)
+}
 
 export default {
   async fetch(request: Request, env: any): Promise<Response> {
@@ -456,6 +473,324 @@ export default {
       
   }
 
+  // 📧 FORGOT PASSWORD
+if (url.pathname === "/forgot-password" && request.method === "POST") {
+
+  const body = (await request.json()) as {
+    email: string
+  }
+
+  if (!isValidEmail(body.email)) {
+    return new Response(
+      JSON.stringify({
+        success: true
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    )
+  }
+
+  const user = await env.noctyr_db
+    .prepare(
+      "SELECT id, email FROM users WHERE email = ?"
+    )
+    .bind(body.email)
+    .first()
+
+  // Siempre devolvemos la misma respuesta
+  // para no revelar si el email existe.
+  if (!user) {
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: "If that email exists, a reset link has been sent."
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    )
+  }
+
+  // 🧹 Eliminar tokens anteriores de este usuario
+  await env.noctyr_db
+    .prepare(
+      "DELETE FROM password_reset_tokens WHERE user_id = ?"
+    )
+    .bind(user.id)
+    .run()
+
+  // 🔐 Generar token
+  const resetToken = generateResetToken()
+
+  // 🔒 Guardar solamente el hash
+  const tokenHash = await hashToken(resetToken)
+
+  // ⏱️ Expira en 30 minutos
+  const expiresAt =
+    Math.floor(Date.now() / 1000) + 30 * 60
+
+  await env.noctyr_db
+    .prepare(
+      `INSERT INTO password_reset_tokens
+       (user_id, token_hash, expires_at)
+       VALUES (?, ?, ?)`
+    )
+    .bind(
+      user.id,
+      tokenHash,
+      expiresAt
+    )
+    .run()
+
+  // 🔗 Link que recibirá el usuario
+  const resetLink =
+    `https://noctyr-studio.com/reset-password?token=${resetToken}`
+
+  // 📧 Enviar email mediante Resend
+  const resendResponse = await fetch(
+    "https://api.resend.com/emails",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "Noctyr Studio <noreply@noctyr-studio.com>",
+        to: [user.email],
+        subject: "Reset your Noctyr Studio password",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto;">
+            <h2>Reset your password</h2>
+
+            <p>
+              You requested a password reset for your Noctyr Studio account.
+            </p>
+
+            <p>
+              Click the button below to choose a new password.
+            </p>
+
+            <p>
+              <a
+                href="${resetLink}"
+                style="
+                  display: inline-block;
+                  padding: 12px 20px;
+                  background: #111827;
+                  color: white;
+                  text-decoration: none;
+                  border-radius: 6px;
+                "
+              >
+                Reset password
+              </a>
+            </p>
+
+            <p>
+              This link expires in 30 minutes.
+            </p>
+
+            <p>
+              If you did not request this, you can safely ignore this email.
+            </p>
+
+            <p>
+              — Noctyr Studio
+            </p>
+          </div>
+        `,
+      }),
+    }
+  )
+
+  if (!resendResponse.ok) {
+    console.error(
+      "RESEND ERROR:",
+      await resendResponse.text()
+    )
+
+    // Si el email no pudo enviarse,
+    // eliminamos el token generado.
+    await env.noctyr_db
+      .prepare(
+        "DELETE FROM password_reset_tokens WHERE token_hash = ?"
+      )
+      .bind(tokenHash)
+      .run()
+
+    return new Response(
+      JSON.stringify({
+        error: "Unable to send reset email"
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    )
+  }
+
+  return new Response(
+    JSON.stringify({
+      success: true,
+      message: "If that email exists, a reset link has been sent."
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+        ...corsHeaders,
+      },
+    }
+  )
+}
+
+// 🔐 RESET PASSWORD
+if (url.pathname === "/reset-password" && request.method === "POST") {
+
+  const body = (await request.json()) as {
+    token: string
+    newPassword: string
+  }
+
+  if (!body.token) {
+    return new Response(
+      JSON.stringify({
+        error: "Invalid reset token"
+      }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    )
+  }
+
+  if (!isValidPassword(body.newPassword)) {
+    return new Response(
+      JSON.stringify({
+        error:
+          "Password must contain at least 8 characters, one letter, one number and one special character"
+      }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    )
+  }
+
+  // 🔒 Hash del token recibido
+  const tokenHash = await hashToken(body.token)
+
+  // 🔎 Buscar token
+  const resetToken = await env.noctyr_db
+    .prepare(
+      `SELECT id, user_id, expires_at
+       FROM password_reset_tokens
+       WHERE token_hash = ?`
+    )
+    .bind(tokenHash)
+    .first()
+
+  if (!resetToken) {
+    return new Response(
+      JSON.stringify({
+        error: "Invalid or expired reset token"
+      }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    )
+  }
+
+  // ⏱️ Comprobar expiración
+  const now = Math.floor(Date.now() / 1000)
+
+  if (resetToken.expires_at <= now) {
+
+    await env.noctyr_db
+      .prepare(
+        "DELETE FROM password_reset_tokens WHERE id = ?"
+      )
+      .bind(resetToken.id)
+      .run()
+
+    return new Response(
+      JSON.stringify({
+        error: "Invalid or expired reset token"
+      }),
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    )
+  }
+
+  // 🧂 Nuevo salt
+  const salt = crypto.getRandomValues(
+    new Uint8Array(16)
+  )
+
+  // 🔐 Hash nueva contraseña
+  const hashedPassword = await hashPassword(
+    body.newPassword,
+    salt
+  )
+
+  // 💾 Actualizar contraseña
+  await env.noctyr_db
+    .prepare(
+      "UPDATE users SET password = ?, salt = ? WHERE id = ?"
+    )
+    .bind(
+      hashedPassword,
+      bytesToHex(salt),
+      resetToken.user_id
+    )
+    .run()
+
+  // 🗑️ Invalidar token inmediatamente
+  await env.noctyr_db
+    .prepare(
+      "DELETE FROM password_reset_tokens WHERE id = ?"
+    )
+    .bind(resetToken.id)
+    .run()
+
+  return new Response(
+    JSON.stringify({
+      success: true,
+      message: "Password reset successfully"
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+        ...corsHeaders,
+      },
+    }
+  )
+}
     // 🙂 WHO AM I ?
     if (url.pathname === "/me" && request.method === "GET") {
      const auth = request.headers.get("Authorization")
